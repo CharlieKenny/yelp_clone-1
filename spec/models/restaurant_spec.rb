@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Restaurant, type: :model do 
   it { is_expected.to have_many :reviews }
+  it { is_expected.to belong_to :user }
+
 
   it 'has no reviews if deleted' do
       restaurant = Restaurant.create(name: 'KFC')
@@ -20,6 +22,7 @@ describe Restaurant, type: :model do
     restaurant = Restaurant.new(name: "Moe's Tavern")
     expect(restaurant).to have(1).error_on(:name)
   end
+
 end
 
 
