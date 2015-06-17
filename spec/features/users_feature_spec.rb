@@ -34,5 +34,26 @@ feature "User can sign in and out" do
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
     end
+
+  it 'should only be able to leave one review per restaurant' do
+    visit '/'
+    click_link 'Add a restaurant'
+    fill_in 'Name', with:'KFC'
+    click_button 'Create Restaurant'
+    click_link 'Review KFC'
+    fill_in 'Thoughts', with:'so so'
+    select '3', from: 'Rating'
+    click_button 'Leave Review'
+    expect(page).to have_content 'so so, 3/5'
+    click_link 'Review KFC'
+    fill_in 'Thoughts', with:'so so'
+    select '3', from: 'Rating'
+    click_button 'Leave Review'
+    p Review.count
+    expect(page).to have_content "has reviewed this restaurant already"
+
+    end
   end
 end
+
+

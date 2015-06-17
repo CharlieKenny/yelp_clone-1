@@ -48,6 +48,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'byebug'
   gem 'shoulda'
   gem 'rspec-collection_matchers'
 end
